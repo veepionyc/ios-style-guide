@@ -15,6 +15,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 
 ## Table of Contents
 
+###Swift and Objective-C
 * [Dot Notation Syntax](#dot-notation-syntax)
 * [Spacing](#spacing)
 * [Conditionals](#conditionals)
@@ -38,6 +39,15 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Imports](#imports)
 * [Protocols](#protocols)
 * [Xcode Project](#xcode-project)
+
+###Git
+* [Branching](#branching)  
+* [Meging](#meging)
+* [Distribution](#Distribution)
+* [Commits](#commits)
+* [Commit messages](#commit-messages)
+
+
 
 ## Dot Notation Syntax [ObjC]
 
@@ -570,3 +580,113 @@ If ours doesn’t fit your tastes, have a look at some other style guides:
 * [Luke Redpath](http://lukeredpath.co.uk/blog/2011/06/28/my-objective-c-style-guide/)
 * [Marcus Zarra](http://www.cimgf.com/zds-code-style-guide/)
 * [Wikimedia](https://www.mediawiki.org/wiki/Wikimedia_Apps/Team/iOS/ObjectiveCStyleGuide)
+
+#Git Style Guide
+
+_inspired by..._  
+* [Vincent Driessen's ultimate branching model](http://nvie.com/posts/a-successful-git-branching-model/)  
+* [git flow](https://github.com/nvie/gitflow/tree/master)
+
+
+##Branching    
+The only two REQUIRED branches on github:    
+- `master`  (aka 'release' in VD's branching model)  
+- `archive`  ('master' in VD's branching model)  
+ 
+#### `master`   
+This is our working branch from which archives will be built. No feature or fix should be committed to master that is not complete, working and tested on another branch. Master should be treated as publishable at all times.
+
+#### `archive`  
+Commits to ARCHIVE are actual XCode archive builds intended for distribution. The commit name and tag should reflect the build number and version number of the build.
+
+#### other branches
+All other branches should have a clearly-labelled owner and only that owner should commit to that branch. 
+
+One 'master' per named developer
+eg   
+`jonathan`  (jonathan l)  
+`rick`  
+`foundry`   (jonathan m)  
+
+all other branches should be 'owned' by using a slash-naming convention
+
+jonathan's branches  
+
+	j/feature  
+	j/tryout  
+	j/whatever  
+	
+ricks  
+
+	r/thing
+	r/other
+	
+foundry  
+
+	f/this
+	f/that 
+	f/theother
+	
+None of these branches _needs_ to be pushed to github, but any of them _may_ be pushed up. Owner is responsible for deleting completed branches from github.
+
+##Merging
+
+merging - especially to master - should be a two-way process to minimise conflicts. First merge FROM master TO your branch, then merge the result BACK to master.
+
+example: I have just finished a feature on experimental branch `j/thing`  
+
+    git checkout jonathan
+    git merge j/thing
+    
+when I am satsfied with the result, I want to merge jonathan with master. I recommend making temporary merge copies of branches for this, so that all merges are tested first
+
+    git branch -b j/merge
+    git merge master
+
+and assuming that works do it for real:
+
+    git checkout -b jonathan
+    git merge master
+    
+then in the other direction..
+
+    git branch -b m/merge
+    git checkout m/merge
+    git merge jonathan
+
+and assuming tha works with no conflicts...
+
+    git checkout master
+    git merge jonathan
+    
+clean up...
+
+    git branch -D j/merge
+    git branch -D m/merge
+    
+    
+##Distribution
+
+When creating an archive for distribution, build from the master branch. When archive is complete, commit with archive build number and merge `master` to `archive`. The commit and tag names should include version number and build. 
+
+No other commits or merges should be made to `archive`.
+
+
+
+##Commits
+
+Make commits little and often. 
+
+One commit should relate to one meaningful unit of work. 
+
+_Never commit code that does not compile_ 
+
+##Commit messages
+
+A commit message should provide a short description of the commit content. 
+     
+Fine-grained commits with meaningful messages greatly facilitate tracking of regression bugs either manually or using [git bisect](https://git-scm.com/docs/git-bisect).
+
+
+
+
