@@ -38,7 +38,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Protocols](#protocols)
 * [Xcode Project](#xcode-project)
 
-## Dot Notation Syntax [+Swift]
+## Dot Notation Syntax [ObjC]
 
 Dot notation should **always** be used for accessing and mutating properties. Bracket notation is preferred in all other instances.
 
@@ -54,11 +54,11 @@ view.backgroundColor = [UIColor orangeColor];
 UIApplication.sharedApplication.delegate;
 ```
 
-## Propterties [+Swift]
+## Properties [ObjC+Swift]
 
 see [JM's SO answer](http://stackoverflow.com/a/14236931/1375695). This also appies to Swift. Always refer to instance properties using `self.property` to clearly distinguish instance properties from local and global variables.
 
-## Spacing [+Swift]
+## Spacing [ObjC+Swift]
 
 * Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
 * Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
@@ -76,7 +76,7 @@ else {
 * Whitespace within methods should be used to separate functionality (though often this can indicate an opportunity to split the method into several, smaller methods). In methods with long or verbose names, a single line of whitespace may be used to provide visual separation before the method’s body.
 * `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
 
-## Conditionals [+Swift]
+## Conditionals [ObjC+Swift]
 
 Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line “inside” the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
 
@@ -99,7 +99,7 @@ or
 if (!error) return success;
 ```
 
-### Ternary Operator [+Swift]
+### Ternary Operator [ObjC+Swift]
 
 The ternary operator, `?` , should only be used when it increases clarity or code neatness. A single condition is usually all that should be evaluated. Evaluating multiple conditions is usually more understandable as an if statement, or refactored into named variables.
 
@@ -113,7 +113,7 @@ result = a > b ? x : y;
 result = a > b ? x = c > d ? c : d : y;
 ```
 
-## Error Handling [Obj-C]
+## Error Handling [ObjC]
 
 When methods return an error parameter by reference, switch on the returned value, not the error variable.
 
@@ -136,7 +136,7 @@ if (error) {
 
 Some of Apple’s APIs write garbage values to the error parameter (if non-NULL) in successful cases, so switching on the error can cause false negatives (and subsequently crash).
 
-## Methods [Obj-C]
+## Methods [ObjC]
 
 In method signatures, there should be a space after the scope (`-` or `+` symbol). There should be a space between the method segments.
 
@@ -145,7 +145,7 @@ In method signatures, there should be a space after the scope (`-` or `+` symbol
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
 
-## Variables [+Swift]
+## Variables [ObjC+Swift]
 
 Variables should be named descriptively, with the variable’s name clearly communicating what the variable _is_ and pertinent information a programmer needs to use that value properly.
 
@@ -186,12 +186,9 @@ See also [JM's SO answer](http://stackoverflow.com/a/14236931/1375695)
 }
 ```
 
-#### Variable Qualifiers   
-[_Objective-C_] 
+#### Variable Qualifiers  [ObjC] 
 
 When it comes to the variable qualifiers [introduced with ARC](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4), the qualifier (`__strong`, `__weak`, `__unsafe_unretained`, `__autoreleasing`) should be placed between the asterisks and the variable name, e.g., `NSString * __weak text`. 
-
-## Naming [+Swift]
 
 Apple naming conventions should be adhered to wherever possible, especially those related to [memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508)).
 
@@ -209,9 +206,20 @@ UIButton *settingsButton;
 UIButton *setBut;
 ```
 
-## Naming [Obj-C]
+## Naming [ObjC+Swift]
 
+All names should be in CamelCase.
+Classes/Structs/Enums take initial capital letter; instances, properties and variables take initial lowerCase
 
+```objc
+MyViewController myInstance;
+```
+
+```swift
+myInstance = MyViewController();  
+```   
+
+## Naming [ObjC]  
 A three letter prefix (e.g., `NYT`) should always be used for class names and constants, however may be omitted for Core Data entity names. Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity. A two letter prefix (e.g., `NS`) is [reserved for use by Apple](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW12).
 
 **For example:**
@@ -225,8 +233,6 @@ static const NSTimeInterval NYTArticleViewControllerNavigationFadeAnimationDurat
 ```objc
 static const NSTimeInterval fadetime = 1.7;
 ```
-
-Properties and local variables should be camel-case with the leading word being lowercase.
 
 Instance variables should be camel-case with the leading word being lowercase, and should be prefixed with an underscore. This is consistent with instance variables synthesized automatically by LLVM. **If LLVM can synthesize the variable automatically, then let it.**
 
@@ -242,7 +248,7 @@ Instance variables should be camel-case with the leading word being lowercase, a
 id varnm;
 ```
 
-### Categories
+## Categories/Extensions [Objc+Swift]
 
 Categories may be used to concisely segment functionality and should be named to describe that functionality.
 
@@ -278,16 +284,21 @@ Methods and properties added in categories should be named with an app- or organ
 @end
 ```
 
-## Comments [+Swift]
+## Comments [Obj+Swift]
 
 When they are needed, comments should be used to explain **why** a particular piece of code does something. Any comments that are used must be kept up-to-date or deleted.
 
 Block comments should generally be avoided, as code should be as self-documenting as possible, with only the need for intermittent, few-line explanations. This does not apply to those comments used to generate documentation.
 
-## init and dealloc/deinit [+Swift]
+## Attributions [Objc+Swift]
 
-In Objective-C, `dealloc` methods should be placed at the top of the implementation, directly after the `@synthesize` and `@dynamic` statements. In swift, `deinit` methods should be the first methods to appear after instance variable declarations. `init` should be placed directly below the `dealloc` methods of any class.
+When copying or adapting code from online sources, comment the code with a source URL. 
 
+## init and dealloc/deinit [ObjC+Swift]
+
+In Objective-C, `dealloc` methods should be placed at the top of the implementation, directly after the `@synthesize` and `@dynamic` statements. In Swift, `deinit` methods should be the first methods to appear after instance variable declarations. `init` should be placed directly below the `dealloc` methods of any class.
+
+[_Objective-C_]  
 `init` methods should be structured like this:
 
 ```objc
@@ -301,7 +312,7 @@ In Objective-C, `dealloc` methods should be placed at the top of the implementat
 }
 ```
 
-## Literals [Obj-C only]
+## Literals [Obj-C]
 
 `NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
 
@@ -323,7 +334,7 @@ NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
 ```
 
-## `CGRect` Functions[+Swift]
+## `CGRect` Functions[ObjC+Swift]
 
 When accessing the `x`, `y`, `width`, or `height` of a `CGRect`, always use the [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) instead of direct struct member access. From Apple's `CGGeometry` reference:
 
@@ -351,7 +362,7 @@ CGFloat width = frame.size.width;
 CGFloat height = frame.size.height;
 ```
 
-## Constants [+Swift]
+## Constants [ObjC+Swift]
 
 Constants are preferred over in-line string literals or numbers, as they allow for easy reproduction of commonly used variables and can be quickly changed without the need for find and replace. Constants should be declared as `static` constants and not `#define`s unless explicitly being used as a macro.
 
@@ -420,7 +431,7 @@ Private properties should be declared in class extensions (anonymous categories)
 All private properties in Swift to be marked `Private`. These should be declared at the top of the class definition, immediately after public properties.
 
 
-## Image Naming [+Swift]
+## Image Naming [ObjC+Swift]
 
 Image names should be named consistently to preserve organization and developer sanity. They should be named as one camel case string with a description of their purpose, followed by the un-prefixed name of the class or property they are customizing (if there is one), followed by a further description of color and/or placement, and finally their state.
 
@@ -431,7 +442,7 @@ Image names should be named consistently to preserve organization and developer 
 
 Images that are used for a similar purpose should be grouped in respective groups in an Images folder or Asset Catalog.
 
-## Booleans [Obj-C]
+## Booleans [ObjC]
 
 Never compare something directly to `YES`, because `YES` is defined as `1`, and a `BOOL` in Objective-C is a `CHAR` type that is 8 bits long (so a value of `11111110` will return `NO` if compared to `YES`).
 
@@ -469,7 +480,7 @@ If the name of a `BOOL` property is expressed as an adjective, the property’s 
 
 _Text and example taken from the [Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE)._
 
-## Singletons [+Swift]
+## Singletons [ObjC+Swift]
 
 Singleton objects should use a thread-safe pattern for creating their shared instance.
 ```objc
@@ -483,8 +494,26 @@ Singleton objects should use a thread-safe pattern for creating their shared ins
 
     return sharedInstance;
 }
-```
+```  
 This will prevent [possible and sometimes frequent crashes](http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html).
+
+[__Swift__]  
+
+```swift
+class Singleton {
+    static let sharedInstance = Singleton()
+}  
+//with additional initialistaion:  
+class Singleton {
+    static let sharedInstance: Singleton = {
+        let instance = Singleton()
+        // setup code
+        return instance
+    }()
+}
+```
+
+(cf https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#singleton)
 
 ## Imports [Obj-C]
 
@@ -504,7 +533,7 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 #import "NYTUserView.h"
 ```
 
-## Protocols
+## Protocols [ObjC+Swift]
 
 In a [delegate or data source protocol](https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaEncyclopedia/DelegatesandDataSources/DelegatesandDataSources.html), the first parameter to each method should be the object sending the message.
 
@@ -522,7 +551,7 @@ This helps disambiguate in cases when an object is the delegate for multiple sim
 - (void)didSelectTableRowAtIndexPath:(NSIndexPath *)indexPath;
 ```
 
-## Xcode project [+Swift]
+## Xcode project [ObjC+Swift]
 
 The physical files should be kept in sync with the Xcode project files in order to avoid file sprawl. Any Xcode groups created should be reflected by folders in the filesystem. Code should be grouped not only by type, but also by feature for greater clarity.
 
