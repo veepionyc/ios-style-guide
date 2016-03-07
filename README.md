@@ -41,8 +41,8 @@ Here are some of the documents from Apple that informed the style guide. If some
 
 ###Git
 * [Branching](#branching)  
-* [Meging](#meging)
-* [Distribution](#Distribution)
+* [Merging](#merging)
+* [Distribution](#distribution)
 * [Commits](#commits)
 * [Commit messages](#commit-messages)
 
