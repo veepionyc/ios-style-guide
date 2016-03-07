@@ -14,6 +14,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 
 ## Table of Contents
 
+###Swift and Objective-C
 * [Dot Notation Syntax](#dot-notation-syntax)
 * [Spacing](#spacing)
 * [Conditionals](#conditionals)
@@ -37,6 +38,15 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Imports](#imports)
 * [Protocols](#protocols)
 * [Xcode Project](#xcode-project)
+
+###Git
+* [Branching](#branching)  
+* [Meging](#meging)
+* [Distribution](#Distribution)
+* [Commits](#commits)
+* [Commit messages](#commit-messages)
+
+
 
 ## Dot Notation Syntax [ObjC]
 
@@ -577,7 +587,7 @@ _inspired by..._
 * [git flow](https://github.com/nvie/gitflow/tree/master)
 
 
-Branch naming  
+##Branching    
 The only two REQUIRED branches on github:    
 - `master`  (aka 'release' in VD's branching model)  
 - `archive`  ('master' in VD's branching model)  
@@ -618,9 +628,9 @@ foundry
 	
 None of these branches _needs_ to be pushed to github, but any of them _may_ be pushed up. Owner is responsible for deleting completed branches from github.
 
-####merging to master
+##Merging
 
-merging to master should be a two-way process (to minimise conflicts). First merge FROM master TO your branch, then merge the result BACK to master.
+merging - especially to master - should be a two-way process to minimise conflicts. First merge FROM master TO your branch, then merge the result BACK to master.
 
 example: I have just finished a feature on experimental branch `j/thing`  
 
@@ -654,7 +664,7 @@ clean up...
     git branch -D m/merge
     
     
-#### distribution builds
+##Distribution
 
 When creating an archive for distribution, build from the master branch. When archive is complete, commit with archive build number and merge `master` to `archive`. The commit and tag names should include version number and build. 
 
@@ -662,11 +672,17 @@ No other commits or merges should be made to `archive`.
 
 
 
-##commits and commit messages
+##Commits
 
-Make commits little and often. One commit should relate to one meaningful unit of work. A commit message should provide a short description of the commit content. 
+Make commits little and often. 
+
+One commit should relate to one meaningful unit of work. 
 
 _Never commit code that does not compile_ 
+
+##Commit messages
+
+A commit message should provide a short description of the commit content. 
      
 Fine-grained commits with meaningful messages greatly facilitate tracking of regression bugs either manually or using [git bisect](https://git-scm.com/docs/git-bisect).
 
