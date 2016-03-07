@@ -1,4 +1,4 @@
-# VeePiO Objective-C [+Swift] Style Guide
+# VeePiO iOS Style Guide
 
 This style guide outlines the coding conventions of the iOS teams at VeepiO. It is a fork of the [New York Times Objective-C Style Guide]((https://github.com/NYTimes/objective-c-style-guide/). We welcome your feedback and [pull requests](https://github.com/veepio/objective-c-style-guide/pulls). 
 
@@ -11,6 +11,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Cocoa Fundamentals Guide](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CocoaFundamentals/Introduction/Introduction.html)
 * [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
 * [iOS App Programming Guide](http://developer.apple.com/library/ios/#documentation/iphone/conceptual/iphoneosprogrammingguide/Introduction/Introduction.html)
+* [Using Swift with Cocoa and Objective-C: Adopting Cocoa Design Patterns](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#singleton)
 
 ## Table of Contents
 
