@@ -604,28 +604,28 @@ All other branches should have a clearly-labelled owner and only that owner shou
 
 One 'master' per named developer
 eg   
-`jonathan`  (jonathan l)  
+`jonathan_l`  (jonathan l)  
 `rick`  
-`foundry`   (jonathan m)  
+`jonathan_m`   (jonathan m)  
 
 all other branches should be 'owned' by using a slash-naming convention
 
-jonathan's branches  
+jl's branches  
 
-	j/feature  
-	j/tryout  
-	j/whatever  
+	jl/feature  
+	jl/tryout  
+	jl/whatever  
 	
 ricks  
 
 	r/thing
 	r/other
 	
-foundry  
+jm  
 
-	f/this
-	f/that 
-	f/theother
+	jm/this
+	jm/that 
+	jm/theother
 	
 None of these branches _needs_ to be pushed to github, but any of them _may_ be pushed up. Owner is responsible for deleting completed branches from github.
 
@@ -633,37 +633,27 @@ None of these branches _needs_ to be pushed to github, but any of them _may_ be 
 
 merging - especially to master - should be a two-way process to minimise conflicts. First merge FROM master TO your branch, then merge the result BACK to master.
 
-example: I have just finished a feature on experimental branch `j/thing`  
+example: I have just finished a feature on experimental branch `jm/thing`  
 
-    git checkout jonathan
-    git merge j/thing
+    git checkout jonathan_m
+    git merge jm/thing
     
-when I am satsfied with the result, I want to merge jonathan with master. I recommend making temporary merge copies of branches for this, so that all merges are tested first
+when I am satsfied with the result, I want to merge jonathan with master. Ensure your local version of master is in synch with remote (on github):
 
-    git branch -b j/merge
-    git merge master
+	git checkout master  
+	git fetch -a  //not necessary but good practice: updates all local copies of remote indexes
+	git pull
 
-and assuming that works do it for real:
+switch back to the branch we want to merge, then update it with latest master:
 
-    git checkout -b jonathan
+    git checkout -b jonathan_m
     git merge master
     
-then in the other direction..
-
-    git branch -b m/merge
-    git checkout m/merge
-    git merge jonathan
-
-and assuming tha works with no conflicts...
+now merge back in the other direction..
 
     git checkout master
-    git merge jonathan
-    
-clean up...
-
-    git branch -D j/merge
-    git branch -D m/merge
-    
+    git merge jonathan_m
+ 
     
 ##Distribution
 
